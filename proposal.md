@@ -32,7 +32,7 @@ ACM Transactions on Management Information Systems, Vol. 6, No. 4, Article 13, P
 
 ### Problem Statement
 
-Nowadays, streaming services are present in our daily life. Video and music recommendations are common as well. If you listen to some genre, the probability that you would listen to another band or song of that genre is higher. But if you like "opposites" genres, it is more difficult to the streaming service suggest something for you. KKBOX, Asia's leading music streaming service and the 11th ACM International Conference on Web Search and Data Mining (WSDM 2018) created a challenge to build a better music recommendation system. The challenge is to predict the chances of a user listening to a song repetitively after the first observable listening event within a time window was triggered.
+Nowadays, streaming services are present in our daily life. Video and music recommendations are common as well. If you listen to some genre, the probability that you would listen to another band or song of that genre is higher. But if you like "opposites" genres, it is more difficult to the streaming service suggest something for you. KKBOX, Asia's leading music streaming service and the 11th ACM International Conference on Web Search and Data Mining (WSDM 2018) created a challenge to build a better music recommendation system. The challenge is a classification problem to predict the chances of a user listening to a song repetitively after the first observable listening event within a time window was triggered.
 
 ### Datasets and Inputs
 
@@ -48,11 +48,13 @@ The challenge provides the following files:
 
 ### Solution Statement
 
-A hybrid approach might help improve the results. As we have the target in training, we could use a unsupervised learning method and combine with a supervised learning method to find new groups into the groups we already discovered in the supervised. Tha unsupervised method applied will be the K-means clustering, depending on the results and groups created, it will be the input for a supervised learning method, ensemble method using random forest. As the ensemble is built from a sample and using the random forest, the final tree is constructed using the best split among random subset of the features trees, it could improve the final result. The general idea is create subsets from the data itself, using the unsupervised method. Thus, after some patterns were founded, them use a supervised method in each cluster to trying to improve results.
+A hybrid approach might help improve the results. As we have the target in training, we could use a unsupervised learning method and combine with a supervised learning method to find new groups into the groups we already discovered in the supervised. The unsupervised method applied will be the K-means clustering, depending on the results and groups created, it will be the input for a supervised learning method, ensemble method using random forest. As the ensemble is built from a sample and using the random forest, the final tree is constructed using the best split among random subset of the features trees, it could improve the final result. The general idea is create subsets from the data itself, using the unsupervised method. Thus, after some patterns were founded, them use a supervised method in each cluster to trying to improve results.
+
+The input features to unsupervised will be the ones at `songs.csv`, and it will need some data preparation as well, such as cleaning, feature extraction, and others. The expected generated groups, therefore, will be combined with the `train.csv` and `members.csv` to be the input for the supervised method. 
 
 ### Benchmark Model
 
-A baseline will be created using a XGBoost model, as explained in this [tutorial](https://machinelearningmastery.com/develop-first-xgboost-model-python-scikit-learn/). Also, as a supporting metric I will compare my model results with the public leaderboard from Kaggle. 
+As the benchmark model will be very simple, the baseline will be created using a [Dummy Classifier](http://scikit-learn.org/stable/modules/generated/sklearn.dummy.DummyClassifier.html). Also, as a supporting metric I will compare my model results with the public leaderboard from Kaggle. 
 
 ### Evaluation Metrics
 
